@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Outlet, useParams, NavLink } from "react-router-dom";
 import { getCategory } from "../api";
 
 export default function Category() {
@@ -10,15 +10,21 @@ export default function Category() {
       <h2>{category.name} Sessions</h2>
 
       <ul className="session-list">
-        {category?.sessions.map(session => (
+        {category?.sessions.map((session) => (
           <li className="session" key={session.id}>
-            <p className="session-name">{session.name}</p>
-            <p>
-              {session.speaker.name} | {session.speaker.org}
-            </p>
+            <NavLink
+              to={session.id}
+              className={({ isActive }) => (isActive ? "session-active" : null)}
+            >
+              <p className="session-name">{session.name}</p>
+              <p>
+                {session.speaker.name} | {session.speaker.org}
+              </p>
+            </NavLink>
           </li>
         ))}
       </ul>
+      <Outlet />
     </>
   );
 }

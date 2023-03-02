@@ -5,6 +5,7 @@ import About from "./About";
 import Categories from "./Categories";
 import Category from "./Category";
 import Header from "./Header";
+import Session from "./Session";
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
         <Route path="/" element={<Home title="Welcome to Red30 Tech" />} />
         <Route path="about" element={<About />} />
         <Route path="categories" element={<Categories />}>
-          <Route path=":catId" element={<Category />} />
+          <Route path=":catId" element={<Category />}>
+            <Route path=":sessionId" element={<Session />} />
+          </Route>
         </Route>
         <Route
           path="*"
